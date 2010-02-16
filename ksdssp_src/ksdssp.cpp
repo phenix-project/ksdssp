@@ -40,10 +40,10 @@
 #include <errno.h>
 #include <math.h>
 #include <string.h>
-#include <unistd.h>
 #include <pdb++.h>
 #include "ksdssp.h"
 #include "Model.h"
+#include "Xgetopt.h"
 
 #ifndef DONT_INSTANIATE
 template class List<Model>;
@@ -70,7 +70,7 @@ main(int argc, char **argv)
 	// Parse command line options
 	int o;
 	char *summaryFile = NULL;
-	while ((o = getopt(argc, argv, "c:h:s:vBS:")) != EOF)
+	while ((o = Xgetopt(argc, argv, "c:h:s:vBS:")) != EOF)
 		switch (o) {
 		  case 'c':
 			Residue::setHBondCutoff(atof(optarg));

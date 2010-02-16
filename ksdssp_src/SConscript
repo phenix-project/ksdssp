@@ -16,4 +16,5 @@ exe = env.Program(
     "Residue.cpp",
     "Structure.cpp",
     "misc.cpp",
+    "Xgetopt.cpp",
     "ksdssp.cpp"])
