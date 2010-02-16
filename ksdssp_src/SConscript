@@ -1,0 +1,19 @@
+
+import libtbx.load_env
+import os
+include_path = libtbx.env.find_in_repositories(
+  relative_path="ksdssp/libpdb++",
+  test=os.path.isdir)
+Import("ksdssp_scons_env", "env_etc")
+env = ksdssp_scons_env.Clone()
+env.Append(CXXFLAGS=["-I%s" % include_path])
+env.Append(LIBPATH=["#ksdssp/lib"])
+env.Prepend(LIBS=["pdb++"])
+exe = env.Program(
+  target=["#ksdssp/exe/ksdssp"],
+  source=[
+    "Model.cpp",
+    "Residue.cpp",
+    "Structure.cpp",
+    "misc.cpp",
+    "ksdssp.cpp"])

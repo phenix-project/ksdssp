@@ -1,0 +1,10 @@
+
+"ksdssp is an open source implementation of the algorithm described in Wolfgang
+Kabsch and Christian Sander, "Dictionary of Protein Secondary Structure:
+Pattern Recognition of Hydrogen-Bonded and Geometrical Features," Biopolymers,
+22, 2577-2637 (1983)."
+
+http://www.cgl.ucsf.edu/Overview/software.html
+
+NOTE: the libpdb++ used here is the same as the libpdb in the Reduce
+distribution.  Do we need to figure out how to eliminate redundancy?

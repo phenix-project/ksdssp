@@ -1,0 +1,125 @@
+.\"
+.\"Copyright (c) 2002 The Regents of the University of California.
+.\"All rights reserved.
+.\"
+.\"Redistribution and use in source and binary forms, with or without
+.\"modification, are permitted provided that the following conditions
+.\"are met:
+.\"  1. Redistributions of source code must retain the above copyright
+.\"     notice, this list of conditions, and the following disclaimer.
+.\"  2. Redistributions in binary form must reproduce the above
+.\"     copyright notice, this list of conditions, and the following
+.\"     disclaimer in the documentation and/or other materials provided
+.\"     with the distribution.
+.\"  3. Redistributions must acknowledge that this software was
+.\"     originally developed by the UCSF Computer Graphics Laboratory
+.\"     under support by the NIH National Center for Research Resources,
+.\"     grant P41-RR01081.
+.\"
+.\"THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER "AS IS" AND ANY
+.\"EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\"IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\"PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS BE LIABLE
+.\"FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+.\"CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+.\"OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+.\"BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+.\"WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+.\"OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+.\"EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+.\"
+.ds *k \fIksdssp\fP
+.ds *K \fIKsdssp\fP
+.ds *H \fB\s-1HELIX\s0\fP
+.ds *S \fB\s-1SHEET\s0\fP
+.ds *A \fB\s-1ATOM\s0\fP
+.TH KSDSSP 1 "" "\fBAPPENDIX 6\fP" "\fBUCSF MidasPlus\fP"
+.UC 4
+.iX 09 start
+.iX 26 start
+.iX ax start
+.iX al start
+.SH NAME
+ksdssp \- generate \*(*H and \*(*S records from protein coordinates
+.SH SYNOPSIS
+.B ksdssp [
+.B \-c
+\fIcutoff\fP ] [
+.B \-h
+\fIlength\fP ] [
+.B \-s
+\fIlength\fP ] [
+.B \-S
+\fIfile\fP ]
+[ \fIPDB_file\fP [ \fIoutput_file\fR ] ]
+.SH DESCRIPTION
+.PP
+\*(*K
+is an implementation of the Kabsch and Sander algorithm for defining
+secondary structure of proteins.
+\*(*K
+reads a Protein Data Bank format file containing coordinates of
+the backbone atoms (N, CA, C, O, and optionally H) of a protein
+and generates \*(*H and \*(*S records.
+If an amide hydrogen is missing, it is placed 1.01 angstroms 
+from N along the bisector of
+(1) the vector opposite the bisector of C-N-CA, and
+(2) the vector opposite the C-O vector from the previous amino acid.
+.SH "COMMAND ARGUMENTS"
+.TP
+\fB\-c\fP \fIenergy_cutoff\fP
+The default energy cutoff for defining hydrogen bonds as recommended by
+Kabsch and Sander is \-0.5 kcal/mol (``A good H-bond has about \-3 kcal/mol
+binding energy'').  This option allows the user to change the cutoff.
+.TP
+\fB\-h\fP \fIminimum_helix_length\fP
+Normally, \*(*H records for helices of length three residues or greater are generated.
+This option allows the user to change the minimum helix length.
+.TP
+\fB\-s\fP \fIminimum_strand_length\fP
+Normally, \*(*S records for strands of length three residues or greater are generated.
+This option allows the user to change the minimum strand length.
+Reducing the minimum strand length to 1 is not recommended, as there
+are bridges in many structures that confuse the
+algorithm for defining sheets.
+.TP
+\fB\-S\fP \fIsummary_file\fP
+Normally, \*(*k silently discards all the hydrogen-bonding information
+after generating the \*(*H and \*(*S records.  This option makes \*(*k
+print the information to a file.  The notation is similar to that used
+by Kabsch and Sander, but is in a vertical instead of horizontal format.
+.TP
+\fIPDB_file\fP
+The input Protein Data Bank (\c
+.SM PDB\c
+) file may contain any legal
+.SM PDB
+records.
+Only \*(*A records will be used.  All others are silently discarded.
+If no
+.I PDB_file
+argument is given, the data is read from standard input.
+.TP
+\fIoutput_file\fP
+The output of \*(*k is a set of
+.SM PDB
+\*(*H and \*(*S records.
+If no
+.I output_file
+argument is given, the records are written to standard output.
+.SH "SEE ALSO"
+Wolfgang Kabsch and Christian Sander,
+``Dictionary of Protein Secondary Structure:
+Pattern Recognition of Hydrogen-Bonded and
+Geometrical Features,''
+.IR Biopolymers ,
+.BR 22 ,
+2577-2637 (1983).
+.SH "AUTHORS"
+Conrad Huang
+.br
+UCSF Computer Graphics Laboratory
+.iX 09 stop
+.iX 26 stop
+.iX ax stop
+.iX al stop

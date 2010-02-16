@@ -1,0 +1,122 @@
+<html>
+<!--
+Copyright (c) 2002 The Regents of the University of California.
+All rights reserved.
+ *
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+  1. Redistributions of source code must retain the above copyright
+     notice, this list of conditions, and the following disclaimer.
+  2. Redistributions in binary form must reproduce the above
+     copyright notice, this list of conditions, and the following
+     disclaimer in the documentation and/or other materials provided
+     with the distribution.
+  3. Redistributions must acknowledge that this software was
+     originally developed by the UCSF Computer Graphics Laboratory
+     under support by the NIH National Center for Research Resources,
+     grant P41-RR01081.
+ *
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER "AS IS" AND ANY
+EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+<head>
+<title>ksdssp documentation</title>
+</head>
+<body>
+<h2>NAME</h2>
+ksdssp - generate <b>HELIX</b> and <b>SHEET</b> records from protein coordinates
+<h2>SYNOPSIS</h2>
+<b>ksdssp</b>
+[ <b>-c</b> <i>cutoff</i> ]
+[ <b>-h</b> <i>length</i> ]
+[ <b>-s</b> <i>length</i> ]
+[ <b>-S</b> <i>file</i> ]
+[ <i>PDB_file</i> [ <i>output_file</i> ] ]
+<h2>DESCRIPTION</h2>
+<i>Ksdssp</i>
+is an implementation of the Kabsch and Sander algorithm for defining
+secondary structure of proteins.
+<i>Ksdssp</i>
+reads a Protein Data Bank format file containing coordinates of
+the backbone atoms (N, CA, C, O, and optionally H) of a protein
+and generates <b>HELIX</b> and <b>SHEET</b> records.
+If an amide hydrogen is missing, it is placed 1.01 angstroms 
+from N along the bisector of
+<ol>
+<li>the vector opposite the bisector of C-N-CA, and
+<li>the vector opposite the C-O vector from the previous amino acid.
+</ol>
+<h2>COMMAND ARGUMENTS</h2>
+<dl>
+<dt>
+<b>-c</b> <i>energy_cutoff</i>
+<dd>
+The default energy cutoff for defining hydrogen bonds as recommended by
+Kabsch and Sander is -0.5 kcal/mol ("A good H-bond has about -3 kcal/mol
+binding energy").  This option allows the user to change the cutoff.
+<dt>
+<b>-h</b> <i>minimum_helix_length</i>
+<dd>
+Normally, <b>HELIX</b> records for helices of length
+three residues or greater are generated.
+This option allows the user to change the minimum helix length.
+<dt>
+<b>-s</b> <i>minimum_strand_length</i>
+<dd>
+Normally, <b>SHEET</b> records for strands of length
+three residues or greater are generated.
+This option allows the user to change the minimum strand length.
+Reducing the minimum strand length to 1 is not recommended, as there
+are bridges in many structures that confuse the
+algorithm for defining sheets.
+<dt>
+<b>-S</b> <i>summary_file</i>
+<dd>
+Normally, <i>ksdssp</i> silently discards all
+the hydrogen-bonding information
+after generating the <b>HELIX</b> and <b>SHEET</b> records.
+This option makes <i>ksdssp</i>
+print the information to a file.  The notation is similar to that used
+by Kabsch and Sander, but is in a vertical instead of horizontal format.
+<dt>
+<i>PDB_file</i>
+<dd>
+The input Protein Data Bank (PDB) file may contain any legal
+PDB records.
+Only <b>ATOM</b> records will be used.  All others are silently discarded.
+If no
+<i>PDB_file</i>
+argument is given, the data is read from standard input.
+<dt>
+<i>output_file</i>
+<dd>
+The output of <i>ksdssp</i> is a set of PDB
+<b>HELIX</b> and <b>SHEET</b> records.
+If no
+<i>output_file</i>
+argument is given, the records are written to standard output.
+</dl>
+<h2>SEE ALSO</h2>
+Wolfgang Kabsch and Christian Sander,
+"Dictionary of Protein Secondary Structure:
+Pattern Recognition of Hydrogen-Bonded and
+Geometrical Features,"
+<i>Biopolymers</i>,
+<b>22</b>,
+2577-2637 (1983).
+<h2>AUTHORS</h2>
+Conrad Huang
+<br>
+UCSF Computer Graphics Laboratory
+</body>
+</html>
