@@ -43,7 +43,7 @@
 #include <pdb++.h>
 #include "ksdssp.h"
 #include "Model.h"
-#include "Xgetopt.h"
+#include "XGetopt.h"
 
 #ifndef DONT_INSTANIATE
 template class List<Model>;

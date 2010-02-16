@@ -23,7 +23,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <stdio.h>
-#include <tchar.h>
+#include <string.h>
 
 #include "XGetopt.h"
 
@@ -146,18 +146,18 @@ int Xgetopt(int argc, char *argv[], char *optstring) {
 
 	optarg = NULL;
 
-	if (next == NULL || *next == _T('\0')) {
+	if (next == NULL || *next == '\0') {
 		if (optind == 0)
 			optind++;
 
-		if (optind >= argc || argv[optind][0] != _T('-') || argv[optind][1] == _T('\0')) {
+		if (optind >= argc || argv[optind][0] != '-' || argv[optind][1] == '\0') {
 			optarg = NULL;
 			if (optind < argc)
 				optarg = argv[optind];
 			return EOF;
 		}
 
-		if (_tcscmp(argv[optind], _T("--")) == 0) {
+		if (strcmp(argv[optind], "--") == 0) {
 			optind++;
 			optarg = NULL;
 			if (optind < argc)
@@ -171,14 +171,14 @@ int Xgetopt(int argc, char *argv[], char *optstring) {
 	}
 
 	char c = *next++;
-	char *cp = _tcschr(optstring, c);
+	char *cp = strchr(optstring, c);
 
-	if (cp == NULL || c == _T(':'))
-		return _T('?');
+	if (cp == NULL || c == ':')
+		return '?';
 
 	cp++;
-	if (*cp == _T(':')) {
-		if (*next != _T('\0')) {
+	if (*cp == ':') {
+		if (*next != '\0') {
 			optarg = next;
 			next = NULL;
 		}
@@ -187,7 +187,7 @@ int Xgetopt(int argc, char *argv[], char *optstring) {
 			optind++;
 		}
 		else {
-			return _T('?');
+			return '?';
 		}
 	}
 
