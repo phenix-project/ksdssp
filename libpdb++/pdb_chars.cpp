@@ -20,10 +20,8 @@
 //
 
 # include	"pdb++.h"
-extern "C" {
 # include	<ctype.h>
-}
-extern "C" int	sprintf(char *, const char *, ...);
+# include	<stdio.h>
 
 static char const * const pdbRecordFormat[PDB::NUM_TYPES] = {
 #include "write_format.i"
