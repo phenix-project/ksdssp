@@ -20,13 +20,8 @@
 //
 
 # include	"pdb++.h"
+# include	<stdio.h>
 # include	<string.h>
-
-# ifndef NULL
-# define	NULL		0
-# endif
-
-extern "C" int	sscanf(const char *, const char *, ...);
 
 //
 //	for each pdb record type there is a format reading in the
