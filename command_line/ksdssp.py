@@ -1,6 +1,7 @@
 # LIBTBX_SET_DISPATCHER_NAME phenix.ksdssp
 
 import libtbx.load_env
+from libtbx.utils import Usage
 import os, sys, subprocess
 
 def run(args):
@@ -11,6 +12,8 @@ def run(args):
     from libtbx.str_utils import show_string
     from libtbx.utils import Sorry
     raise Sorry("Missing phenix.ksdssp executable: %s" % show_string(exe))
+  if len(args) == 0 or not os.path.isfile(args[0]) :
+    raise Usage("phenix.ksdssp model.pdb")
   subprocess.call([exe] + args)
 
 if (__name__ == "__main__"):
