@@ -35,7 +35,7 @@
 #ifdef NO_SQRTF
 #define	sqrtf	sqrt
 #else
-#ifndef __GNUC__
+#if !defined(__GNUC__) && !(defined(_MSC_VER) && defined(_WIN64))
 extern "C" float sqrtf(float);
 #endif
 #endif
