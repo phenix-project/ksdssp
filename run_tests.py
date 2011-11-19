@@ -11,7 +11,7 @@ def exercise () :
   if pdb_file is None :
     print "skipping"
     return False
-  ksdssp_out = easy_run.fully_buffered(command="phenix.ksdssp %s" % pdb_file)
+  ksdssp_out = easy_run.fully_buffered(command='phenix.ksdssp "%s"' % pdb_file)
   assert not show_diff("\n".join(ksdssp_out.stdout_lines),
 """\
 HELIX    1   1 VAL A   15  ASP A   17  5                                   3
