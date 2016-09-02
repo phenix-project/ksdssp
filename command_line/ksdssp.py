@@ -1,5 +1,3 @@
-# LIBTBX_SET_DISPATCHER_NAME phenix.ksdssp
-
 import libtbx.load_env
 from libtbx.utils import Usage
 import os, sys, subprocess
