@@ -1,3 +1,4 @@
+from __future__ import print_function
 
 from libtbx import easy_run
 from libtbx.test_utils import show_diff
@@ -9,7 +10,7 @@ def exercise () :
     relative_path="phenix_regression/pdb/1ywf.pdb",
     test=os.path.isfile)
   if pdb_file is None :
-    print "skipping"
+    print("skipping")
     return False
   ksdssp_out = easy_run.fully_buffered(command='phenix.ksdssp "%s"' % pdb_file)
   assert not show_diff("\n".join(ksdssp_out.stdout_lines),
@@ -30,7 +31,7 @@ SHEET    1   A 4 LEU A  27  SER A  30  0
 SHEET    2   A 4 VAL A 156  HIS A 159  1  N  VAL A 156   O  PHE A  28
 SHEET    3   A 4 ASP A  51  ASP A  54  1  N  ASP A  51   O  LEU A 157
 SHEET    4   A 4 ASP A  74  LEU A  77  1  N  ASP A  74   O  VAL A  52""")
-  print "OK"
+  print("OK")
 
 if __name__ == "__main__" :
   exercise()
