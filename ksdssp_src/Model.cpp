@@ -108,6 +108,7 @@ done:
 	if (rList_.count() > 0) {
 		rArray_ = new ListArray<Residue>(rList_);
 		hBond_ = new SquareArray<char>(rArray_->count());
+		hBond_->zero();
 	}
 }
 
